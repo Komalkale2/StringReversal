@@ -1,0 +1,43 @@
+# File Organizer Automation Script
+
+import os
+import shutil
+
+def organize_folder(folder_path):
+    if not os.path.exists(folder_path):
+        print("❌ Folder does not exist!")
+        return
+
+    # Create subfolders for different file types
+    file_types = {
+        'Images': ['.jpg', '.jpeg', '.png', '.gif', '.bmp'],
+        'Documents': ['.pdf', '.docx', '.txt', '.xlsx'],
+        'Audio': ['.mp3', '.wav', '.aac'],
+        'Videos': ['.mp4', '.mkv', '.avi'],
+        'Others': []
+    }
+
+    for file in os.listdir(folder_path):
+        file_path = os.path.join(folder_path, file)
+
+        if os.path.isfile(file_path):
+            moved = False
+            for folder, extensions in file_types.items():
+                if any(file.lower().endswith(ext) for ext in extensions):
+                    dest_folder = os.path.join(folder_path, folder)
+                    os.makedirs(dest_folder, exist_ok=True)
+                    shutil.move(file_path, os.path.join(dest_folder, file))
+                    moved = True
+                    break
+
+            # Move uncategorized files to "Others"
+            if not moved:
+                dest_folder = os.path.join(folder_path, 'Others')
+                os.makedirs(dest_folder, exist_ok=True)
+                shutil.move(file_path, os.path.join(dest_folder, file))
+
+    print("✅ Files have been organized successfully!")
+
+# --- Main Program ---
+folder_to_organize = input("Enter the full path of the folder to organize: ")
+organize_folder(folder_to_organize)
