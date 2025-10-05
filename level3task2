@@ -1,0 +1,26 @@
+# Interactive Data Visualization Tool using Plotly
+
+import pandas as pd
+import plotly.express as px
+
+# Sample dataset (you can replace it with CSV input)
+data = {
+    'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Eva'],
+    'Age': [25, 30, 35, 40, 28],
+    'Salary': [50000, 60000, 75000, 80000, 52000],
+    'Department': ['HR', 'IT', 'Finance', 'IT', 'HR']
+}
+
+df = pd.DataFrame(data)
+
+# --- Bar Chart ---
+bar_fig = px.bar(df, x='Name', y='Salary', color='Department',
+                 title='Employee Salary by Department',
+                 labels={'Salary': 'Salary ($)', 'Name': 'Employee Name'})
+bar_fig.show()
+
+# --- Scatter Plot ---
+scatter_fig = px.scatter(df, x='Age', y='Salary', color='Department', size='Salary',
+                         title='Salary vs Age',
+                         labels={'Salary': 'Salary ($)', 'Age': 'Age (Years)'})
+scatter_fig.show()
