@@ -1,0 +1,16 @@
+# Email Validator Program
+
+def is_valid_email(email):
+    # Basic checks for email structure
+    if "@" not in email or "." not in email:
+        return False
+
+    # Split into parts
+    try:
+        username, domain = email.split("@")
+        domain_name, extension = domain.split(".")
+    except ValueError:
+        return False  # If split fails, it's not valid
+
+    # Apply simple validation rules
+    if not username or not domain_name or not extens_
