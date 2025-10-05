@@ -1,0 +1,32 @@
+# Password Strength Checker Program
+
+import string
+
+def check_password_strength(password):
+    strength_points = 0
+
+    # Check password length
+    if len(password) >= 8:
+        strength_points += 1
+    if any(char.islower() for char in password):
+        strength_points += 1
+    if any(char.isupper() for char in password):
+        strength_points += 1
+    if any(char.isdigit() for char in password):
+        strength_points += 1
+    if any(char in string.punctuation for char in password):
+        strength_points += 1
+
+    # Determine strength level
+    if strength_points == 5:
+        return "🔒 Strong password!"
+    elif 3 <= strength_points < 5:
+        return "🟡 Medium password — you can make it stronger!"
+    else:
+        return "🔓 Weak password — try adding numbers, symbols, and uppercase letters!"
+
+
+# --- Main Program ---
+user_password = input("Enter your password: ")
+result = check_password_strength(user_password)
+print(result)
