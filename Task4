@@ -1,0 +1,26 @@
+# Basic Calculator Program
+
+def calculator(num1, num2, operator):
+    operations = {
+        '+': num1 + num2,
+        '-': num1 - num2,
+        '*': num1 * num2,
+        '/': "Error! Division by zero." if num2 == 0 else num1 / num2,
+        '%': "Error! Division by zero." if num2 == 0 else num1 % num2
+    }
+
+    # Return result if operator is valid, else error message
+    return operations.get(operator, "Invalid operator! Please use +, -, *, /, or %.")
+
+
+# --- Main Program ---
+try:
+    a = float(input("Enter first number: "))
+    b = float(input("Enter second number: "))
+    op = input("Enter operator (+, -, *, /, %): ")
+
+    result = calculator(a, b, op)
+    print(f"Result: {result}")
+
+except ValueError:
+    print("Please enter valid numeric values.")
